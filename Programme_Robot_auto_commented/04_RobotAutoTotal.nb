@@ -1,0 +1,548 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     23531,        539]
+NotebookOptionsPosition[     23082,        521]
+NotebookOutlinePosition[     23463,        537]
+CellTagsIndexPosition[     23420,        534]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Fonction", " ", "qui", " ", "permet", " ", 
+     RowBox[{"d", "'"}], "afficher", " ", "la", " ", "matrice", " ", "de", 
+     " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}], " ", "puis", " ", "de", " ", "calculer",
+      " ", "et", " ", 
+     RowBox[{"d", "'"}], "afficher", " ", "sa", " ", "matrice", " ", 
+     "homog\[EGrave]ne", " ", "en", " ", "direct"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"PrintMatriceRobot", "[", "matriceDH_", "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Print", "[", 
+       RowBox[{
+        RowBox[{"MatrixForm", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", "d", "}"}], ",", 
+           RowBox[{"{", "\[Theta]", "}"}], ",", 
+           RowBox[{"{", "l", "}"}], ",", 
+           RowBox[{"{", "\[Alpha]", "}"}]}], "}"}], "]"}], 
+        RowBox[{"MatrixForm", "[", "matriceDH", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{"MatrixForm", "[", 
+         RowBox[{"MatriceHomo", "[", 
+          RowBox[{"matriceDH", ",", "0", ",", 
+           RowBox[{"Length", "[", 
+            RowBox[{"Transpose", "[", "matriceDH", "]"}], "]"}]}], "]"}], 
+         "]"}], "]"}], "]"}], ";"}], "\[IndentingNewLine]", ")"}]}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.5998196129619513`*^9, 3.5998196309553075`*^9}, {
+  3.5998196824545097`*^9, 3.599819688395714*^9}, {3.599819753712366*^9, 
+  3.5998197553005075`*^9}, {3.5998198541183233`*^9, 3.599819855638412*^9}, {
+  3.5998199296945715`*^9, 3.599819929883705*^9}, {3.5998206038872356`*^9, 
+  3.5998206042284775`*^9}, {3.6005250472817163`*^9, 3.600525174286965*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "permet", " ", "de", " ", 
+     "g\[EAcute]n\[EAcute]rer", " ", "la", " ", "mod\[EAcute]lisation", " ", 
+     "du", " ", "robot", " ", "seul", " ", "\[AGrave]", " ", "partir", " ", 
+     "de", " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "xpos"}], ",", " ", 
+    RowBox[{
+    "xneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "x"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "ypos"}], ",", " ", 
+    RowBox[{
+    "yneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "y"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "zpos"}], ",", " ", 
+    RowBox[{
+    "zneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "z"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateRobotTotal", "[", 
+     RowBox[{
+     "matriceDH_", ",", "xpos_", ",", "xneg_", ",", "ypos_", ",", "yneg_", 
+      ",", "zpos_", ",", "zneg_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "affiche", " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+       RowBox[{
+       "Hartenberg", " ", "et", " ", "la", " ", "matrice", " ", 
+        "g\[EAcute]om\[EAcute]trique"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"PrintMatriceRobot", "[", "matriceDH", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "creation", " ", "de", " ", "la", " ", "matrice", " ", "de", " ", 
+         "Denavit"}], "-", 
+        RowBox[{
+        "Hartenberg", " ", "\[EAcute]tendue", " ", "aux", " ", "liaisons"}]}],
+        "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"mliaisonCRT", "=", 
+       RowBox[{"CreateLiaisons", "[", "matriceDH", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"affichage", " ", "du", " ", "robot"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{"Show", "[", 
+         RowBox[{
+          RowBox[{"CreateRobot", "[", "mliaisonCRT", "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"650", ",", "475"}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"xneg", ",", "xpos"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"yneg", ",", "ypos"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"zneg", ",", "zpos"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"ViewAngle", "\[Rule]", 
+           RowBox[{"Pi", "/", "15"}]}], ",", 
+          RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}]}], "]"}], "]"}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "creation", " ", "des", " ", "boutons", " ", "de", " ", "commande"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Boutons", "[", "matriceDH", "]"}], "]"}], ";"}], 
+     "\[IndentingNewLine]", ")"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5998131614768763`*^9, 3.599813175750977*^9}, {
+   3.599813226156042*^9, 3.599813271951215*^9}, 3.599814010588292*^9, {
+   3.599814081338835*^9, 3.599814145829947*^9}, {3.599814237987962*^9, 
+   3.599814323915601*^9}, {3.5998146395662894`*^9, 3.5998146501727953`*^9}, {
+   3.599815687508422*^9, 3.5998157589774942`*^9}, {3.5998158786858377`*^9, 
+   3.5998159930686007`*^9}, {3.5998160354781275`*^9, 3.599816037033211*^9}, {
+   3.5998161059703984`*^9, 3.5998161278669004`*^9}, {3.599816209845053*^9, 
+   3.599816225265954*^9}, {3.599819080609148*^9, 3.599819088327281*^9}, {
+   3.599819988830489*^9, 3.5998200376924396`*^9}, {3.599820358584237*^9, 
+   3.5998203848058057`*^9}, {3.5998220081269617`*^9, 
+   3.5998220117565346`*^9}, {3.599822058713123*^9, 3.599822059727828*^9}, {
+   3.599822108488948*^9, 3.5998221377731256`*^9}, {3.600525178941265*^9, 
+   3.6005253466101255`*^9}, {3.6005257427594705`*^9, 
+   3.6005257821593657`*^9}, {3.600525847637822*^9, 3.6005258788098836`*^9}, {
+   3.6005259601830025`*^9, 3.600525992486684*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Ouverture", " ", "du", " ", "package", " ", "MultivariateStatistics", " ",
+     "comprenant", " ", "la", " ", "creation", " ", 
+    RowBox[{"d", "'"}], "ellipso\[IDoubleDot]des"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Needs", "[", "\"\<MultivariateStatistics`\>\"", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "et", " ", 
+      "calcul", " ", 
+      RowBox[{"l", "'"}], "ellipso\[IHat]de", " ", "de", " ", 
+      "manipulabit\[EAcute]", " ", "\[AGrave]", " ", "partir", " ", "de", " ",
+       "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+     RowBox[{"Hartenberg", " ", 
+      RowBox[{"(", "matriceDG", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Cette", " ", "ellipso\[IDoubleDot]de", " ", "est", " ", 
+     "stock\[EAcute]e", " ", "dans", " ", "la", " ", "fonction", " ", 
+     "EllipseCER"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"L", "'"}], "ellipso\[IDoubleDot]de", " ", "est", " ", 
+     "calcul\[EAcute]", " ", "\[AGrave]", " ", "partir", " ", "de", " ", "la",
+      " ", "jacobienne", " ", "de", " ", "la", " ", "matrice", " ", 
+     "g\[EAcute]om\[EAcute]trique", " ", "du", " ", "robot", " ", "dont", " ",
+      "on", " ", "prend", " ", "la", " ", "base", " ", "de", " ", "de", " ", 
+     "vecteur", " ", "propre", " ", "et", " ", "ses", " ", "valeurs", " ", 
+     "propres"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CreateEllipseRobot", "[", "matriceDH_", "]"}], ":=", 
+     RowBox[{"(", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"calcul", " ", "de", " ", "la", " ", "jacobienne"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"mjCER", "=", 
+        RowBox[{"Jacobienne", "[", 
+         RowBox[{
+          RowBox[{"MatriceGeom", "[", 
+           RowBox[{"MatriceHomo", "[", 
+            RowBox[{"matriceDH", ",", "0", ",", 
+             RowBox[{"Length", "[", 
+              RowBox[{"Transpose", "[", "matriceDH", "]"}], "]"}]}], "]"}], 
+           "]"}], ",", "matriceDH"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "extraction", " ", "des", " ", "param\[EGrave]tres", " ", 
+         "lin\[EAcute]aires", " ", "de", " ", "la", " ", "jacobienne"}], 
+        "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"MbaseCER", ":=", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{
+          RowBox[{"Transpose", "[", 
+           RowBox[{
+            RowBox[{"(", "mjCER", ")"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ";;", "3"}], "]"}], "]"}], "]"}], " ", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ";;", "3"}], "]"}], "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"g\[EAcute]n\[EAcute]ration", " ", "de", " ", 
+         RowBox[{"l", "'"}], "ellipsoide"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"EllipseCER", ":=", 
+        RowBox[{"Graphics3D", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"RGBColor", "[", 
+            RowBox[{"0", ",", ".49", ",", ".49"}], "]"}], ",", 
+           RowBox[{"Opacity", "[", "0.5", "]"}], ",", 
+           RowBox[{"Ellipsoid", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"VecteurFinal", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", 
+                RowBox[{"Length", "[", 
+                 RowBox[{"Transpose", "[", "matriceDH", "]"}], "]"}]}], "]"}],
+               "[", 
+              RowBox[{"[", "1", "]"}], "]"}], ",", 
+             RowBox[{"Sequence", "@@", 
+              RowBox[{"Eigensystem", "[", "MbaseCER", "]"}]}]}], "]"}]}], 
+          "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", ")"}]}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.599814521655208*^9, 3.599814566564988*^9}, {
+   3.5998191076999807`*^9, 3.5998192006336536`*^9}, {3.599819334944274*^9, 
+   3.5998193433912725`*^9}, {3.5998201398896494`*^9, 3.599820209226039*^9}, {
+   3.599820252527063*^9, 3.5998202698213015`*^9}, {3.5998203143095846`*^9, 
+   3.5998203206210384`*^9}, {3.5998204165187206`*^9, 
+   3.5998204876724143`*^9}, {3.599820549529341*^9, 3.5998205506501293`*^9}, {
+   3.5998207123555813`*^9, 3.599820783818693*^9}, {3.5998208292592287`*^9, 
+   3.5998209035112343`*^9}, {3.599820937812359*^9, 3.5998209812831216`*^9}, {
+   3.5998210343150997`*^9, 3.59982107492222*^9}, {3.5998211280085793`*^9, 
+   3.5998211296907697`*^9}, {3.59982116281221*^9, 3.5998211758156633`*^9}, {
+   3.5998221476090875`*^9, 3.59982214788128*^9}, {3.599823428291897*^9, 
+   3.5998234297659383`*^9}, {3.5998234763796654`*^9, 3.599823478697322*^9}, {
+   3.6005253585846043`*^9, 3.600525697879862*^9}, 3.60052584248522*^9, 
+   3.600526654875243*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "permet", " ", "de", " ", 
+     "g\[EAcute]n\[EAcute]rer", " ", "la", " ", "mod\[EAcute]lisation", " ", 
+     "du", " ", "robot", " ", "avec", " ", "son", " ", 
+     "ellispso\[IDoubleDot]de", " ", "de", " ", "manipulabilit\[EAcute]", " ",
+      "\[AGrave]", " ", "partir", " ", "de", " ", "la", " ", "matrice", " ", 
+     "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "xpos"}], ",", " ", 
+    RowBox[{
+    "xneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "x"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "ypos"}], ",", " ", 
+    RowBox[{
+    "yneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "y"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "zpos"}], ",", " ", 
+    RowBox[{
+    "zneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "z"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateRobotEllipse", "[", 
+     RowBox[{
+     "matriceDH_", ",", "xpos_", ",", "xneg_", ",", "ypos_", ",", "yneg_", 
+      ",", "zpos_", ",", "zneg_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "affiche", " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+       RowBox[{
+       "Hartenberg", " ", "et", " ", "la", " ", "matrice", " ", 
+        "g\[EAcute]om\[EAcute]trique"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"PrintMatriceRobot", "[", "matriceDH", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "creation", " ", "de", " ", "la", " ", "matrice", " ", "de", " ", 
+         "Denavit"}], "-", 
+        RowBox[{
+        "Hartenberg", " ", "\[EAcute]tendue", " ", "aux", " ", "liaisons"}]}],
+        "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"mliaisonCRE", "=", 
+       RowBox[{"CreateLiaisons", "[", "matriceDH", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"creation", " ", "de", " ", 
+        RowBox[{"l", "'"}], "ellipso\[IDoubleDot]de", " ", "de", " ", 
+        "manipulabilit\[EAcute]", " ", "du", " ", "robot"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"CreateEllipseRobot", "[", "matriceDH", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "affichage", " ", "du", " ", "robot", " ", "et", " ", "de", " ", "son",
+         " ", "ellipso\[IDoubleDot]de", " ", "de", " ", 
+        "manipulabilit\[EAcute]"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{"Show", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"CreateRobot", "[", "mliaisonCRE", "]"}], ",", 
+            "EllipseCER"}], "}"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"650", ",", "475"}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"xneg", ",", "xpos"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"yneg", ",", "ypos"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"zneg", ",", "zpos"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"ViewAngle", "\[Rule]", 
+           RowBox[{"Pi", "/", "15"}]}], ",", 
+          RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}]}], "]"}], "]"}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "creation", " ", "des", " ", "boutons", " ", "de", " ", "commande"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Boutons", "[", "matriceDH", "]"}], "]"}], ";"}], 
+     "\[IndentingNewLine]", ")"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5998145886996794`*^9, 3.599814590201741*^9}, {
+   3.5998146809025555`*^9, 3.5998147348831053`*^9}, {3.599816496020618*^9, 
+   3.5998164986244435`*^9}, {3.5998166813207088`*^9, 3.599816684292825*^9}, 
+   3.599816757744261*^9, {3.599816796514493*^9, 3.5998167983658175`*^9}, {
+   3.599816837475482*^9, 3.5998168512682567`*^9}, {3.5998171892144685`*^9, 
+   3.599817206053384*^9}, {3.599817306656407*^9, 3.5998173282506714`*^9}, {
+   3.599817487205733*^9, 3.5998174880863547`*^9}, {3.5998175743738008`*^9, 
+   3.599817574943198*^9}, {3.5998176340898237`*^9, 3.5998177119627934`*^9}, {
+   3.5998177568172646`*^9, 3.5998177889800262`*^9}, {3.5998179431237817`*^9, 
+   3.5998179455484977`*^9}, {3.599818736333185*^9, 3.5998187465714474`*^9}, {
+   3.5998192682925835`*^9, 3.599819271151619*^9}, {3.5998193028020177`*^9, 
+   3.5998193214417186`*^9}, {3.5998193542118936`*^9, 3.599819403169374*^9}, {
+   3.5998195900449495`*^9, 3.5998196014820347`*^9}, {3.599821098664022*^9, 
+   3.5998211442790947`*^9}, {3.5998212116550255`*^9, 3.599821225064516*^9}, {
+   3.599821274865229*^9, 3.5998213051460056`*^9}, 3.599821391050164*^9, {
+   3.599821427849986*^9, 3.599821464154327*^9}, 3.5998215380872083`*^9, {
+   3.599821603461189*^9, 3.599821687004197*^9}, {3.599822073390127*^9, 
+   3.5998220981266146`*^9}, {3.599822153073595*^9, 3.599822176077867*^9}, {
+   3.6005254670642443`*^9, 3.600525494765676*^9}, 3.6005256213055153`*^9, {
+   3.600525731179285*^9, 3.6005257364690332`*^9}, {3.600525932208223*^9, 
+   3.600525970025793*^9}, {3.600526011297634*^9, 3.6005260840829105`*^9}, 
+   3.600526133753926*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "permet", " ", "de", " ", 
+     "g\[EAcute]n\[EAcute]rer", " ", "la", " ", "mod\[EAcute]lisation", " ", 
+     "du", " ", "robot", " ", "avec", " ", "les", " ", "rep\[EGrave]res", " ",
+      "attach\[EAcute]s", " ", "\[AGrave]", " ", "chaque", " ", "liaisons", 
+     " ", "\[AGrave]", " ", "partir", " ", "de", " ", "la", " ", "matrice", 
+     " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "xpos"}], ",", " ", 
+    RowBox[{
+    "xneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "x"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "ypos"}], ",", " ", 
+    RowBox[{
+    "yneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "y"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"les", " ", "valeur", " ", "zpos"}], ",", " ", 
+    RowBox[{
+    "zneg", " ", "representent", " ", "respectivement", " ", "la", " ", 
+     "valeur", " ", "max", " ", "et", " ", "min", " ", "de", " ", "la", " ", 
+     "fen\[EHat]tre", " ", "graphique", " ", "suivant", " ", "z"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateRobotReperes", "[", 
+     RowBox[{
+     "matriceDH_", ",", "xpos_", ",", "xneg_", ",", "ypos_", ",", "yneg_", 
+      ",", "zpos_", ",", "zneg_", " ", ",", "tailrep_"}], "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "affiche", " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+       RowBox[{
+       "Hartenberg", " ", "et", " ", "la", " ", "matrice", " ", 
+        "g\[EAcute]om\[EAcute]trique"}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"PrintMatriceRobot", "[", "matriceDH", "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "creation", " ", "de", " ", "la", " ", "matrice", " ", "de", " ", 
+         "Denavit"}], "-", 
+        RowBox[{
+        "Hartenberg", " ", "\[EAcute]tendue", " ", "aux", " ", "liaisons"}]}],
+        "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"mliaisonCRR", "=", 
+       RowBox[{"CreateLiaisons", "[", "matriceDH", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "affichage", " ", "du", " ", "robot", " ", "et", " ", "des", " ", 
+        "rep\[EGrave]res", " ", "attach\[EAcute]s", " ", "a", " ", "chacune", 
+        " ", "de", " ", "ses", " ", "liaisons"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{"Show", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"CreateRobot", "[", "mliaisonCRR", "]"}], ",", 
+            RowBox[{"CreateReperes", "[", 
+             RowBox[{"mliaisonCRR", ",", "tailrep"}], "]"}]}], "}"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"650", ",", "475"}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"xneg", ",", "xpos"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"yneg", ",", "ypos"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"zneg", ",", "zpos"}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"ViewAngle", "\[Rule]", 
+           RowBox[{"Pi", "/", "15"}]}], ",", 
+          RowBox[{"Lighting", "\[Rule]", "\"\<Neutral\>\""}]}], "]"}], "]"}], 
+       "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "creation", " ", "des", " ", "boutons", " ", "de", " ", "commande"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"Boutons", "[", "matriceDH", "]"}], "]"}], ";"}], 
+     "\[IndentingNewLine]", ")"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5998226191732335`*^9, 3.599822769203582*^9}, 
+   3.5998228128128586`*^9, 3.599822870560125*^9, {3.5998230002911344`*^9, 
+   3.5998230006273727`*^9}, 3.599823042719953*^9, {3.6005260993695784`*^9, 
+   3.600526194264826*^9}}]
+},
+WindowSize->{775, 614},
+WindowMargins->{{Automatic, 181}, {Automatic, 60}},
+Magnification->0.8999999761581421,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 1824, 42, 130, "Input"],
+Cell[2384, 64, 4937, 108, 410, "Input"],
+Cell[7324, 174, 4958, 106, 430, "Input"],
+Cell[12285, 282, 6187, 129, 490, "Input"],
+Cell[18475, 413, 4603, 106, 410, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

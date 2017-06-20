@@ -1,0 +1,660 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     26082,        651]
+NotebookOptionsPosition[     25511,        630]
+NotebookOutlinePosition[     25855,        645]
+CellTagsIndexPosition[     25812,        642]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "le", " ", 
+     "corps", " ", "de", " ", "la", " ", "pi\[EGrave]ce", " ", "a", " ", "de",
+      " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"le", " ", "dernier", " ", "chiffre", " ", 
+    RowBox[{"(", 
+     RowBox[{"ici", " ", "2"}], ")"}], " ", "est", " ", "la", " ", "largeur", 
+    " ", "du", " ", "tube"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateCorps", "[", 
+     RowBox[{"matriceDH_", ",", "a_"}], "]"}], ":=", 
+    RowBox[{"Graphics3D", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"RGBColor", "[", 
+        RowBox[{".25", ",", ".43", ",", ".82"}], "]"}], ",", 
+       RowBox[{"Tube", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"VecteurFinal", "[", 
+             RowBox[{"matriceDH", ",", "0", ",", 
+              RowBox[{"a", "-", "1"}]}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"VecteurIntermediaire", "[", 
+             RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"VecteurFinal", "[", 
+             RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", "2"}], "]"}]}], 
+      "}"}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5957094586137724`*^9, 3.5957094595328255`*^9}, {
+   3.595709508357618*^9, 3.595709544835704*^9}, {3.5957095856880407`*^9, 
+   3.5957095987027855`*^9}, 3.595709703773795*^9, {3.5957098447802153`*^9, 
+   3.595709855958855*^9}, {3.595712629086728*^9, 3.5957126335129814`*^9}, {
+   3.59571685111087*^9, 3.5957168512958803`*^9}, {3.600524017059973*^9, 
+   3.60052406621554*^9}, {3.6005241116471715`*^9, 3.600524127906678*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "la", " ", 
+     "pivot", " ", "de", " ", "la", " ", "pi\[EGrave]ce", " ", "a", " ", "de",
+      " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"le", " ", "dernier", " ", "chiffre", " ", 
+    RowBox[{"(", 
+     RowBox[{"ici", " ", "3"}], ")"}], " ", "est", " ", "la", " ", "largeur", 
+    " ", "du", " ", "cylindre"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreatePivot", "[", 
+     RowBox[{"matriceDH_", ",", "a_"}], "]"}], ":=", 
+    RowBox[{"Graphics3D", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"RGBColor", "[", 
+        RowBox[{".49", ",", "0", ",", "0"}], "]"}], ",", 
+       RowBox[{"Cylinder", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "+", 
+            RowBox[{
+             RowBox[{"MatriceRepere", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0", ",", 
+               RowBox[{"-", "3"}]}], "}"}]}]}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "+", 
+            RowBox[{
+             RowBox[{"MatriceRepere", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0", ",", 
+               RowBox[{"+", "3"}]}], "}"}]}]}]}], "}"}], ",", "3"}], "]"}]}], 
+      "}"}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5957098835024304`*^9, 3.595709883564434*^9}, {
+  3.595709915241246*^9, 3.595709923891741*^9}, {3.595716850356827*^9, 
+  3.5957168505268364`*^9}, {3.600524071440242*^9, 3.600524078902523*^9}, {
+  3.600524138267001*^9, 3.6005241510790606`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "la", " ", 
+     "glissi\[EGrave]re", " ", "de", " ", "la", " ", "pi\[EGrave]ce", " ", 
+     "a", " ", "de", " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], 
+    "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"le", " ", "dernier", " ", "chiffre", " ", 
+    RowBox[{"(", 
+     RowBox[{"ici", " ", "3"}], ")"}], " ", "est", " ", "la", " ", "largeur", 
+    " ", "du", " ", "cylindre"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateGlissiere", "[", 
+     RowBox[{"matriceDH_", ",", "a_"}], "]"}], ":=", 
+    RowBox[{"Graphics3D", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0", ",", ".49", ",", "0"}], "]"}], ",", 
+       RowBox[{"Cylinder", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "+", 
+            RowBox[{
+             RowBox[{"MatriceRepere", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0", ",", 
+               RowBox[{"-", "3"}]}], "}"}]}]}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "+", 
+            RowBox[{
+             RowBox[{"MatriceRepere", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", 
+               RowBox[{"a", "-", "1"}]}], "]"}], ".", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "0", ",", 
+               RowBox[{"+", "3"}]}], "}"}]}]}]}], "}"}], ",", "3"}], "]"}]}], 
+      "}"}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5957100031322727`*^9, 3.595710009597643*^9}, {
+  3.595713253957286*^9, 3.595713253997286*^9}, {3.5957134677512302`*^9, 
+  3.595713467835235*^9}, {3.595716848990749*^9, 3.59571684918276*^9}, {
+  3.6005240834327126`*^9, 3.600524087478587*^9}, {3.600524156771105*^9, 
+  3.6005241571373463`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "le", " ", 
+     "corps", " ", "de", " ", 
+     RowBox[{"l", "'"}], "effecteur", " ", "a", " ", "de", " ", "la", " ", 
+     "matrice", " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"le", " ", "dernier", " ", "chiffre", " ", 
+    RowBox[{"(", 
+     RowBox[{"ici", " ", "2"}], ")"}], " ", "est", " ", "la", " ", "largeur", 
+    " ", "du", " ", "tube"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateFinal", "[", 
+     RowBox[{"matriceDH_", ",", "a_"}], "]"}], ":=", 
+    RowBox[{"Graphics3D", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"49", ",", "49", ",", "0"}], "]"}], ",", 
+       RowBox[{"JoinForm", "[", "\"\<Round\>\"", "]"}], ",", 
+       RowBox[{"Tube", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"VecteurFinal", "[", 
+             RowBox[{"matriceDH", ",", "0", ",", 
+              RowBox[{"a", "-", "1"}]}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"VecteurIntermediaire", "[", 
+             RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"VecteurFinal", "[", 
+             RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", "2"}], "]"}]}], 
+      "}"}], "]"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.595710112772544*^9, 3.5957101129325533`*^9}, 
+   3.5957136337392454`*^9, {3.595716846775622*^9, 3.5957168469486322`*^9}, {
+   3.600524159901319*^9, 3.6005241940299025`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", 
+     "automatiquement", " ", "les", " ", "volumes", " ", "de", " ", "toutes", 
+     " ", "les", " ", "pi\[EGrave]ce", " ", "et", " ", "liaisons", " ", "du", 
+     " ", "robot", " ", "\[AGrave]", " ", "partir", " ", "de", " ", "la", " ",
+      "matrice", " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{
+    "Hartenberg", " ", "\[EAcute]tendu", " ", "aux", " ", "liaisons", " ", 
+     RowBox[{"(", "matriceDHetendue", ")"}]}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreateRobot", "[", "matriceDHetendue_", "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Table", " ", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"i", "==", 
+         RowBox[{"Length", "[", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"matriceDHetendue", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"matriceDHetendue", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "i"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"CreateFinal", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}], ",", 
+            RowBox[{"CreateGlissiere", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}]}], "}"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"CreateFinal", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}], ",", 
+            RowBox[{"CreatePivot", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}]}], "}"}]}], 
+         "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"matriceDHetendue", "[", 
+           RowBox[{"[", 
+            RowBox[{"1", ",", "i"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"CreateCorps", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}], ",", 
+            RowBox[{"CreateGlissiere", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}]}], "}"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"CreateCorps", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}], ",", 
+            RowBox[{"CreatePivot", "[", 
+             RowBox[{
+              RowBox[{"matriceDHetendue", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], ",", "i"}], "]"}]}], "}"}]}], 
+         "]"}]}], "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", 
+         RowBox[{"Transpose", "[", 
+          RowBox[{"matriceDHetendue", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}]}], "}"}]}], "]"}]}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{
+  3.5957154396961384`*^9, {3.5957154707728415`*^9, 3.595715562812462*^9}, {
+   3.5957156723047247`*^9, 3.595715717175291*^9}, {3.5957161298388653`*^9, 
+   3.5957161309929314`*^9}, {3.5957168459075727`*^9, 3.595716846102584*^9}, {
+   3.5957170255948343`*^9, 3.5957170335942917`*^9}, {3.6005242070997815`*^9, 
+   3.6005243585028057`*^9}, 3.600524555238917*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "renvoie", " ", "un", " ", "vecteur", " ", 
+     "avec", " ", "le", " ", "type", " ", "de", " ", "liaison", " ", "dans", 
+     " ", "la", " ", "matrice", " ", "de", " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"1", "=", 
+    RowBox[{"liaison", " ", "glissi\[EGrave]re"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"0", "=", 
+    RowBox[{"liaison", " ", "pivot"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"RechercheGlisiere", "[", "matriceDH_", "]"}], ":=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Variables", "[", 
+         RowBox[{"matriceDH", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", "i"}], "]"}], "]"}], "]"}], "===", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"VariablesDH", "[", "matriceDH", "]"}], "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "}"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", 
+          RowBox[{"Transpose", "[", "matriceDH", "]"}], "]"}]}], "}"}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Fonction", " ", "qui", " ", "renvoie", " ", "la", " ", "matrice", " ", 
+      "de", " ", "Denavit"}], "-", 
+     RowBox[{
+     "Hartenberg", " ", "etendue", " ", "aux", " ", "liaisons", " ", 
+      "\[AGrave]", " ", "partir", " ", "de", " ", "a", " ", "matrice", " ", 
+      "de", " ", "Denavit"}], "-", 
+     RowBox[{"Hartenberg", " ", 
+      RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"CreateLiaisons", "[", "matriceDH_", "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"RechercheGlisiere", "[", "matriceDH", "]"}], ",", 
+      "matriceDH"}], "}"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.595715926669428*^9, 3.595716040673787*^9}, {
+  3.5998218812939773`*^9, 3.5998219130539875`*^9}, {3.6005243658359833`*^9, 
+  3.600524547132162*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Fonction", " ", "qui", " ", "cr\[EAcute]e", " ", "un", " ", "bouton", " ",
+     "li\[EAcute]", " ", "\[AGrave]", " ", "la", " ", "variable", " ", 
+    RowBox[{"(", "m", ")"}], " ", "et", " ", "qui", " ", "r\[EAcute]affiche", 
+    " ", "le", " ", "nom", " ", "de", " ", "cette", " ", "variable"}], "*)"}],
+   "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"CreationBouton", "[", "m_", "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Manipulator", "[", 
+       RowBox[{"Dynamic", "[", "m", "]"}], "]"}], ",", 
+      RowBox[{"Dynamic", "[", "m", "]"}], ",", "m"}], "}"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Fonction", " ", "qui", " ", "cr\[EAcute]e", " ", "un", " ", "bouton", 
+     " ", "li\[EAcute]", " ", "\[AGrave]", " ", "la", " ", "variable", " ", 
+     "num\[EAcute]ro", " ", 
+     RowBox[{"(", "a", ")"}], " ", "du", " ", "vecteur", " ", 
+     RowBox[{"(", "m", ")"}], " ", "ne", " ", "comprenant", " ", "que", " ", 
+     "des", " ", "variables"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BoutonDepuisVecteur", "[", 
+     RowBox[{"m_", ",", "a_"}], "]"}], ":=", 
+    RowBox[{"CreationBouton", "[", 
+     RowBox[{"m", "[", 
+      RowBox[{"[", "a", "]"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Fonction", " ", "qui", " ", "cr\[EAcute]e", " ", "une", " ", 
+     "s\[EAcute]rie", " ", "de", " ", "boutons", " ", "\[AGrave]", " ", 
+     "partir", " ", 
+     RowBox[{"d", "'"}], "un", " ", "vecteur", " ", 
+     RowBox[{"(", "m", ")"}], " ", "ne", " ", "comprenant", " ", "que", " ", 
+     "des", " ", "variables"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Boutons", "[", "m_", "]"}], ":=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Clear", "[", "\"\<q*\>\"", "]"}], ";", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"BoutonDepuisVecteur", "[", 
+         RowBox[{
+          RowBox[{"VariablesDH", "[", "m", "]"}], ",", "i"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", 
+          RowBox[{"Length", "[", 
+           RowBox[{"VariablesDH", "[", "m", "]"}], "]"}]}], "}"}]}], "]"}]}], 
+     "}"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.592122132885974*^9, 3.592122162487667*^9}, 
+   3.592122497237814*^9, {3.592122933100744*^9, 3.592122962542428*^9}, {
+   3.5921230204977427`*^9, 3.5921230582419014`*^9}, {3.5921231703013105`*^9, 
+   3.5921231731824756`*^9}, {3.5921232932183414`*^9, 3.592123293425353*^9}, {
+   3.592123488622518*^9, 3.592123543628664*^9}, {3.5921249874932485`*^9, 
+   3.592125005792295*^9}, {3.5921250670788*^9, 3.592125076746353*^9}, {
+   3.5921252310791807`*^9, 3.592125262024951*^9}, {3.592125449760689*^9, 
+   3.5921254599312706`*^9}, {3.5921258214099455`*^9, 3.592125836634816*^9}, {
+   3.5921259587918034`*^9, 3.5921259715105305`*^9}, {3.5921262055999203`*^9, 
+   3.5921262217578444`*^9}, {3.5998128306156025`*^9, 3.59981283288105*^9}, {
+   3.599812967415118*^9, 3.599812975502855*^9}, 3.599813015873167*^9, {
+   3.6005245725477486`*^9, 3.600524745991988*^9}, {3.6005247951175327`*^9, 
+   3.6005248056229663`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonctions", " ", "qui", " ", "g\[EAcute]n\[EGrave]rent", " ", "une", " ",
+      "fl\[EGrave]che", " ", "de", " ", "longueur", " ", 
+     RowBox[{"(", "taille", ")"}], " ", "qui", " ", "repr\[EAcute]sente", " ", 
+     RowBox[{"l", "'"}], "axe", " ", "X"}], ",", " ", 
+    RowBox[{
+     RowBox[{
+     "Y", " ", "ou", " ", "Z", " ", "du", " ", "bout", " ", "de", " ", "la", 
+      " ", "pi\[EGrave]ce", " ", 
+      RowBox[{"(", "a", ")"}], " ", "de", " ", "la", " ", "matrice", " ", 
+      "de", " ", "Denavit"}], "-", 
+     RowBox[{"Hartenberg", " ", 
+      RowBox[{"(", "matriceDH", ")"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"AxeX", "[", 
+      RowBox[{"matriceDH_", ",", "a_", ",", "taille_"}], "]"}], ":=", 
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{"{", 
+       RowBox[{"Red", ",", 
+        RowBox[{"Arrow", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"VecteurFinal", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "+", 
+             RowBox[{
+              RowBox[{"MatriceRepere", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], ".", 
+              RowBox[{"{", 
+               RowBox[{"taille", ",", "0", ",", "0"}], "}"}]}]}]}], "}"}], 
+          ",", "0.05"}], "]"}]}], "}"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"AxeY", "[", 
+      RowBox[{"matriceDH_", ",", "a_", ",", "taille_"}], "]"}], ":=", 
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{"{", 
+       RowBox[{"Green", ",", 
+        RowBox[{"Arrow", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"VecteurFinal", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "+", 
+             RowBox[{
+              RowBox[{"MatriceRepere", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], ".", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "taille", ",", "0"}], "}"}]}]}]}], "}"}], 
+          ",", "0.05"}], "]"}]}], "}"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"AxeZ", "[", 
+      RowBox[{"matriceDH_", ",", "a_", ",", "taille_"}], "]"}], ":=", 
+     RowBox[{"Graphics3D", "[", 
+      RowBox[{"{", 
+       RowBox[{"Blue", ",", 
+        RowBox[{"Arrow", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"VecteurFinal", "[", 
+              RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"VecteurFinal", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "+", 
+             RowBox[{
+              RowBox[{"MatriceRepere", "[", 
+               RowBox[{"matriceDH", ",", "0", ",", "a"}], "]"}], ".", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0", ",", "taille"}], "}"}]}]}]}], "}"}], 
+          ",", "0.05"}], "]"}]}], "}"}], "]"}]}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.597987064935542*^9, 3.5979870983970237`*^9}, {
+  3.597987154090164*^9, 3.597987160075377*^9}, {3.597987257255062*^9, 
+  3.5979873149672537`*^9}, {3.597987350839916*^9, 3.597987365359789*^9}, {
+  3.5979874685390043`*^9, 3.5979875686227407`*^9}, {3.5979876914851975`*^9, 
+  3.597987716588784*^9}, {3.597987766718346*^9, 3.597987768917899*^9}, {
+  3.597987811173707*^9, 3.5979878402928424`*^9}, {3.597988006678923*^9, 
+  3.5979880553927894`*^9}, {3.5979883583211308`*^9, 3.597988364696638*^9}, {
+  3.6005247688659554`*^9, 3.6005249012242928`*^9}, {3.6005249338939323`*^9, 
+  3.6005249617362194`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "un", " ", 
+     "rep\[EGrave]re", " ", "XYZ", " ", "de", " ", "longueur", " ", 
+     RowBox[{"(", "taille", ")"}], " ", "du", " ", "bout", " ", "de", " ", 
+     "la", " ", "pi\[EGrave]ce", " ", 
+     RowBox[{"(", "a", ")"}], " ", "de", " ", "la", " ", "matrice", " ", "de",
+      " ", "Denavit"}], "-", 
+    RowBox[{"Hartenberg", " ", 
+     RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"CreateRepere", "[", 
+      RowBox[{"matriceDH_", ",", "a_", ",", "taille_"}], "]"}], ":=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"AxeX", "[", 
+        RowBox[{"matriceDH", ",", "a", ",", "taille"}], "]"}], ",", 
+       RowBox[{"AxeY", "[", 
+        RowBox[{"matriceDH", ",", "a", ",", "taille"}], "]"}], ",", 
+       RowBox[{"AxeZ", "[", 
+        RowBox[{"matriceDH", ",", "a", ",", "taille"}], "]"}]}], "}"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Fonction", " ", "qui", " ", "g\[EAcute]n\[EGrave]re", " ", "le", " ", 
+      "rep\[EGrave]re", " ", "XYZ", " ", "de", " ", "longueur", " ", 
+      RowBox[{"(", "taille", ")"}], " ", "du", " ", "bout", " ", "de", " ", 
+      "toutes", " ", "les", " ", "pi\[EGrave]ces", " ", "de", " ", "la", " ", 
+      "matrice", " ", "de", " ", "Denavit"}], "-", 
+     RowBox[{"Hartenberg", " ", 
+      RowBox[{"(", "matriceDH", ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"CreateReperes", "[", 
+     RowBox[{"matriceDH_", ",", "taille_"}], "]"}], ":=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"CreateRepere", "[", 
+       RowBox[{
+        RowBox[{"matriceDH", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{"i", "-", "1"}], ",", "taille"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{
+         RowBox[{"Length", "[", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"matriceDH", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "]"}], "]"}], "+", "1"}]}], 
+       "}"}]}], "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.5979884763793573`*^9, 3.5979885989225273`*^9}, {
+   3.597988644844627*^9, 3.597988645378016*^9}, {3.597989101560614*^9, 
+   3.597989272794752*^9}, 3.5979893135824313`*^9, {3.6005249056794324`*^9, 
+   3.600525009263817*^9}}]
+},
+WindowSize->{1584, 763},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 2080, 47, 92, "Input"],
+Cell[2640, 69, 2391, 58, 132, "Input"],
+Cell[5034, 129, 2462, 60, 132, "Input"],
+Cell[7499, 191, 1901, 46, 92, "Input"],
+Cell[9403, 239, 3957, 94, 252, "Input"],
+Cell[13363, 335, 2168, 56, 132, "Input"],
+Cell[15534, 393, 3161, 67, 132, "Input"],
+Cell[18698, 462, 4374, 106, 92, "Input"],
+Cell[23075, 570, 2432, 58, 92, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

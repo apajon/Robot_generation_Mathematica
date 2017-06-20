@@ -1,0 +1,241 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      9863,        232]
+NotebookOptionsPosition[      9387,        212]
+NotebookOutlinePosition[      9731,        227]
+CellTagsIndexPosition[      9688,        224]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Initialisation", " ", "de", " ", "mathematica"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Suppression", " ", "de", " ", "toutes", " ", "les", " ", "variables", " ",
+     "en", " ", "m\[EAcute]moires"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Clear", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Definition", " ", "du", " ", "r\[EAcute]pertoire", " ", "contenant", " ",
+      "ce", " ", "notebook", " ", "comme", " ", "\[EAcute]tant", " ", "le", 
+     " ", "r\[EAcute]pertoire", " ", "principal"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"SetDirectory", "[", 
+    RowBox[{"NotebookDirectory", "[", "]"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.592046867333003*^9, 3.592046867510013*^9}, {
+  3.600522172813916*^9, 3.600522270823806*^9}}],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\Lytha\\\\Desktop\\\\Projet_Robot_Mathematica\
+\\\\Programme_Robot_auto_comment\[EAcute]\"\>"], "Output",
+ CellChangeTimes->{
+  3.5920473214609776`*^9, 3.5920475948486147`*^9, 3.592047857188619*^9, 
+   3.592048072506935*^9, 3.5920481065278807`*^9, 3.5920481956859803`*^9, 
+   3.592048351384886*^9, 3.59204839446235*^9, 3.5920486989077625`*^9, 
+   3.5920488914227743`*^9, 3.5920653189123726`*^9, 3.592065464528702*^9, {
+   3.5920672758163013`*^9, 3.5920672920962324`*^9}, 3.5921115624603806`*^9, 
+   3.592115405576194*^9, 3.592120472824024*^9, 3.5921215210289783`*^9, 
+   3.592121691970755*^9, 3.5921218345779123`*^9, 3.59212871133224*^9, 
+   3.5921287656163445`*^9, 3.5921290768261447`*^9, 3.5921336521478386`*^9, 
+   3.5921336925561495`*^9, 3.5921337612820807`*^9, 3.5921338158241997`*^9, {
+   3.5921339013680925`*^9, 3.592133940453328*^9}, 3.59213739277779*^9, 
+   3.5925586152763357`*^9, 3.5925605102017193`*^9, 3.5943739032351885`*^9, 
+   3.595707158714444*^9, 3.5957111352568245`*^9, 3.59571669228643*^9, 
+   3.595717002498513*^9, 3.59571704545697*^9, 3.5961640400736465`*^9, 
+   3.5979822871334715`*^9, 3.597989429585376*^9, 3.597989558356681*^9, 
+   3.5980003929897194`*^9, 3.598009020958911*^9, 3.598009503246007*^9, 
+   3.598009582153083*^9, 3.598931074736204*^9, 3.598933688797268*^9, 
+   3.5989339023546467`*^9, 3.598934058514307*^9, {3.598934337418269*^9, 
+   3.5989343658544188`*^9}, 3.5989344955219836`*^9, 3.5998112475576553`*^9, 
+   3.599814931863422*^9, 3.5998156311085668`*^9, 3.599820088874674*^9, 
+   3.5998217443512435`*^9, 3.5998231288418083`*^9, 3.5998231730725408`*^9, 
+   3.5998232424319105`*^9, 3.599823281489287*^9, 3.5998233447998323`*^9, 
+   3.599823444230178*^9, 3.5998235150273886`*^9, 3.600423676695755*^9, 
+   3.600425149987225*^9, 3.6005262101207933`*^9, 3.6005381313932343`*^9, 
+   3.6005391171761847`*^9, 3.60065923002769*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Utilisation", " ", "du", " ", "fichier", " ", "02", 
+    RowBox[{"_MatriceGeom", ".", "nb"}], " ", "comme", " ", "un", " ", 
+    "package"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Contient", " ", "toutes", " ", "les", " ", "fonction", " ", "de", " ", 
+     "transformations", " ", "matricielles", " ", 
+     RowBox[{"d", "'"}], "un", " ", "tableau", " ", "de", " ", "Denavit"}], 
+    "-", "Hartenberg"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"ouverture", " ", "du", " ", "notebook", " ", "02", 
+    RowBox[{"_MatriceGeom", ".", "nb"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"NotebookOpen", "[", 
+     RowBox[{"ToFileName", "[", 
+      RowBox[{
+       RowBox[{"Directory", "[", "]"}], ",", "\"\<02_MatriceGeom.nb\>\""}], 
+      "]"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "selection", " ", "du", " ", "notebook", " ", "qui", " ", "vient", " ", 
+     RowBox[{"d", "'"}], "etre", " ", "ouvert", " ", "comme", " ", "notebook",
+      " ", "principal"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectedNotebook", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"evaluation", " ", "du", " ", "notebook", " ", "principal"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookEvaluate", "[", "%", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"fermeture", " ", "du", " ", "notebook", " ", "principal"}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"NotebookClose", "[", 
+    RowBox[{"InputNotebook", "[", "]"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "selection", " ", "du", " ", "notebook", " ", "restant", " ", "comme", 
+      " ", "notebook", " ", "principal"}], ",", " ", 
+     RowBox[{"ici", " ", "01", 
+      RowBox[{"_general", ".", "nb"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectedNotebook", "[", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.59204688161782*^9, 3.592046909752429*^9}, {
+  3.5920476160018244`*^9, 3.5920476202200656`*^9}, {3.5920672876619787`*^9, 
+  3.5920672891900663`*^9}, {3.5921153924914455`*^9, 3.592115394861581*^9}, {
+  3.5989343532975254`*^9, 3.5989343553749886`*^9}, {3.600522289386943*^9, 
+  3.6005223045046525`*^9}, {3.6005225123792953`*^9, 3.6005226364089394`*^9}, {
+  3.600522669652816*^9, 3.6005227494779425`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Utilisation", " ", "du", " ", "fichier", " ", "03", 
+    RowBox[{"_FormulesRobotAuto", ".", "nb"}], " ", "comme", " ", "un", " ", 
+    "package"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Contient", " ", "toutes", " ", "les", " ", "fonction", " ", "de", " ", 
+    "g\[EAcute]n\[EAcute]ration", " ", "des", " ", "volumes", " ", 
+    "representant", " ", "un", " ", "robot", " ", "ainsi", " ", "que", " ", 
+    "pour", " ", "son", " ", "contr\[OHat]le"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"NotebookOpen", "[", 
+     RowBox[{"ToFileName", "[", 
+      RowBox[{
+       RowBox[{"Directory", "[", "]"}], ",", 
+       "\"\<03_FormulesRobotAuto.nb\>\""}], "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectedNotebook", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookEvaluate", "[", "%", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"NotebookClose", "[", 
+    RowBox[{"InputNotebook", "[", "]"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectedNotebook", "[", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.592133617404851*^9, 3.59213363942111*^9}, {
+   3.5921336853197355`*^9, 3.592133685645754*^9}, 3.5957169898554173`*^9, {
+   3.598934359896194*^9, 3.59893436160942*^9}, {3.6005226406759453`*^9, 
+   3.6005226520159707`*^9}, {3.600522743816947*^9, 3.600522812857758*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Utilisation", " ", "du", " ", "fichier", " ", "04", 
+    RowBox[{"_RobotAutoTotal", ".", "nb"}], " ", "comme", " ", "un", " ", 
+    "package"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Contient", " ", "toutes", " ", "les", " ", "fonction", " ", "de", " ", 
+    "g\[EAcute]n\[EAcute]ration", " ", "automatique", " ", 
+    RowBox[{"d", "'"}], "un", " ", "robot"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"NotebookOpen", "[", 
+     RowBox[{"ToFileName", "[", 
+      RowBox[{
+       RowBox[{"Directory", "[", "]"}], ",", "\"\<04_RobotAutoTotal.nb\>\""}],
+       "]"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectedNotebook", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"NotebookEvaluate", "[", "%", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"NotebookClose", "[", 
+    RowBox[{"InputNotebook", "[", "]"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectedNotebook", "[", "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.5998149464030657`*^9, 3.5998149639074526`*^9}, {
+  3.5998200815504956`*^9, 3.59982008278335*^9}, {3.599823117849038*^9, 
+  3.599823121702756*^9}, {3.600522660133725*^9, 3.6005226674762754`*^9}, {
+  3.600522766609716*^9, 3.6005228026445312`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "ouvertue", " ", "du", " ", "fichier", " ", "de", " ", "test", " ", "de", 
+    " ", "g\[EAcute]n\[EAcute]ration", " ", "de", " ", "robots"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"NotebookOpen", "[", 
+    RowBox[{"ToFileName", "[", 
+     RowBox[{
+      RowBox[{"Directory", "[", "]"}], ",", "\"\<99_Robottest.nb\>\""}], 
+     "]"}], "]"}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.5957103055785723`*^9, 3.595710307564686*^9}, {
+  3.595716993515423*^9, 3.5957169970354276`*^9}, {3.59571716984103*^9, 
+  3.5957171700270414`*^9}, {3.5961640295383186`*^9, 3.5961640296320677`*^9}, {
+  3.600522816797551*^9, 3.600522835192564*^9}}]
+},
+WindowSize->{782, 559},
+WindowMargins->{{8, Automatic}, {Automatic, 76}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (November 20, 2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 891, 20, 132, "Input"],
+Cell[1473, 44, 1894, 26, 87, "Output"]
+}, Open  ]],
+Cell[3382, 73, 2490, 54, 272, "Input"],
+Cell[5875, 129, 1462, 32, 172, "Input"],
+Cell[7340, 163, 1338, 29, 152, "Input"],
+Cell[8681, 194, 702, 16, 52, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,12 @@
+*.aux
+*.bbl
+*.spl
+*.blg
+*.log
+*.out
+*.synctex.gz
+Article.pdf
+Draft.pdf
+*.avi
+*.bak
+
